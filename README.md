@@ -9,8 +9,7 @@ This is source code for the `cv2drawx` package project. This package includes ne
 ```python
 import cv2
 import numpy as np
-from cv2drawx.box import RoundedCornerBox
-from cv2drawx.draw_line import draw_line
+from cv2drawx.box import text_box
 ```
 
 ### Setup a blank cv2 window
@@ -23,31 +22,21 @@ frame.fill(200)
 ```python
 while True:
     # =======================================
-    # DRAW ROUNDED CORNER BOX
-    # WITH DASH BORDER
+    # DRAW TEXT BOX
     # =======================================
-    box = RoundedCornerBox(
-        MatLike=frame,
-        start_point=(50, 50),
-        end_point=(500, 500),
-        fill_color=(50, 50, 50),
-        border_thickness=1,
-        border_color=(0, 200, 230),
-        border_radius=10,
-        dash_size=15,
-        dash_gap=10
-    )
-    box.draw()
-
-    # =======================================
-    # DRAW DIAGONAL DASH LINE
-    # =======================================
-    draw_line(
+    text_box(
         frame,
-        (0, 0),
-        (frame.shape[1], frame.shape[0]),
-        (0, 0, 0),
-        1, 10, 10
+"""
+Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit amet""",
+        (50, 200),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        2, (0, 0, 0), 2,
+        (255, 180, 20),
+        (0, 0, 0), 3, [20, 50, 300, 80],
+        dash_size=10, dash_gap=10, border_radius=10
     )
 
     cv2.imshow("frame", frame)
