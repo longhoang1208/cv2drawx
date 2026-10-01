@@ -1,2 +1,6 @@
-*.venv/
-*.vscode/
+*
+!.gitignore
+!box.py
+!requirements.txt
+!test.py
+!draw_line.py
