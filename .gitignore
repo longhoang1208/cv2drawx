@@ -1,6 +1,5 @@
 *
+!cv2drawx/
 !.gitignore
-!box.py
+!README.md
 !requirements.txt
-!test.py
-!draw_line.py
