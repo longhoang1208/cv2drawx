@@ -46,3 +46,6 @@ Lorem ipsum dolor sit amet""",
 
 cv2.destroyAllWindows()
 ```
+
+### Result
+<img width="600" alt="result" src="https://github.com/user-attachments/assets/8f61ba64-af80-4c93-a77c-ff1bbee070f0" />
