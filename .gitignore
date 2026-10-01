@@ -1,6 +1,6 @@
-*
-!cv2drawx/
-!.gitignore
-!README.md
-!requirements.txt
-!pyproject.toml
+.venv/
+.vscode/
+__pycache__/
+cv2drawx.egg-info/
+dist/
+test*
