@@ -2,7 +2,6 @@
 
 import cv2
 import numpy as np
-from cv2drawx.draw_line import draw_line
 
 
 def draw_line(MatLike: np.ndarray,
