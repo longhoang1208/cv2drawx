@@ -9,7 +9,7 @@ This is source code for the `cv2drawx` package project. This package includes ne
 ```python
 import cv2
 import numpy as np
-from cv2drawx.box import text_box
+from cv2drawx.drawing_utils import text_box
 ```
 
 ### Setup a blank cv2 window
