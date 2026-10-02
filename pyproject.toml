@@ -7,7 +7,7 @@ name = "cv2drawx"
 version = "0.1.11"
 readme = "README.md"
 requires-python = ">=3.9"
-license = "LICENSE"
+license = { file = "LICENSE"}
 dependencies = [
     "numpy",
     "opencv-python"
