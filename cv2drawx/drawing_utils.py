@@ -57,12 +57,15 @@ def box(MatLike: np.ndarray,
         border_thickness: int|None=None,
         dash_size: int=0,
         dash_gap: int=0,
-        border_radius: int=1
+        border_radius: int=0
         ) -> None:
 
     x1, y1 = start_point
     x2, y2 = end_point
 
+    """
+    BOX CORNERS
+    """
     # TOP-LEFT CORNER
     cv2.circle(
         MatLike,
@@ -118,7 +121,7 @@ def box(MatLike: np.ndarray,
 
     """
     =========================================
-    DRAW BOX CORNER BORDER
+    DRAW BOX CORNERS BORDER
     =========================================
     Draw no-fill circles to create border.
     -----------------------------------------
@@ -179,6 +182,9 @@ def box(MatLike: np.ndarray,
             lineType=cv2.LINE_AA
         )
 
+    """
+    BOX FILL
+    """
     # MAIN FILL
     cv2.rectangle(
         MatLike,
@@ -215,11 +221,11 @@ def box(MatLike: np.ndarray,
     cv2.rectangle(
         MatLike,
         (
-            x2,
+            x2 - border_radius,
             y1 + border_radius
         ),
         (
-            x2 - border_radius,
+            x2,
             y2 - border_radius
         ),
         color=fill_color,
@@ -368,3 +374,45 @@ def text_box(MatLike: np.ndarray,
         fontThickness,
         cv2.LINE_AA
     )
+
+
+def progress_bar(MatLike: np.ndarray,
+                 start_point: tuple[int, int],
+                 end_point: tuple[int, int],
+                 max_value: float,
+                 current_value: float,
+                 background_fill: tuple[int, int, int],
+                 bar_fill: tuple[int, int, int],
+                 thickness: int,
+                 border_color: tuple[int, int, int]
+                 ) -> None:
+    x1, _ = start_point
+    x2, y2 = end_point
+
+    bar_width = x2 - x1
+
+    """
+    Percentage must be in range [0; 1]
+    """
+    perc = max(
+        0.0,
+        min(current_value / max_value, 1.0)
+    )
+    fill_size = int(bar_width * perc)
+
+    box(
+        MatLike,
+        start_point,
+        end_point,
+        background_fill,
+        border_color,
+        thickness
+    )
+
+    if fill_size > 0:
+        box(
+            MatLike,
+            start_point,
+            (x1 + fill_size, y2),
+            bar_fill
+        )
