@@ -1,6 +1,6 @@
 # [PYTHON] cv2drawx
 
-This is source code for the `cv2drawx` package project. This package includes new drawing features for opencv-python such as draw dash lines, rounded boxes, etc.
+This is the `cv2drawx` package project. This package includes new drawing features for opencv-python such as draw dash lines, rounded boxes, etc.
 
 
 ## Sample code
