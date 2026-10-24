@@ -64,126 +64,75 @@ def box(MatLike: np.ndarray,
     x2, y2 = end_point
 
     """
+    =========================================
     BOX CORNERS
+    =========================================
     """
     # TOP-LEFT CORNER
-    cv2.circle(
+    cv2.ellipse(
         MatLike,
         (
             x1 + border_radius,
             y1 + border_radius
         ),
-        radius=border_radius,
+        axes=[border_radius]*2,
+        angle=0,
+        startAngle=180,
+        endAngle=270,
         color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
+        thickness=-1
     )
 
     # TOP-RIGHT CORNER
-    cv2.circle(
+    cv2.ellipse(
         MatLike,
         (
             x2 - border_radius,
             y1 + border_radius
         ),
-        radius=border_radius,
+        axes=[border_radius]*2,
+        angle=0,
+        startAngle=270,
+        endAngle=360,
         color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
+        thickness=-1
     )
 
     # BOTTOM-LEFT CORNER
-    cv2.circle(
+    cv2.ellipse(
         MatLike,
         (
             x1 + border_radius,
             y2 - border_radius
         ),
-        radius=border_radius,
+        axes=[border_radius]*2,
+        angle=0,
+        startAngle=90,
+        endAngle=180,
         color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
+        thickness=-1
     )
 
     # BOTTOM-RIGHT CORNER
-    cv2.circle(
+    cv2.ellipse(
         MatLike,
         (
             x2 - border_radius,
             y2 - border_radius
         ),
-        radius=border_radius,
+        axes=[border_radius]*2,
+        angle=0,
+        startAngle=0,
+        endAngle=90,
         color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
+        thickness=-1
     )
 
 
     """
     =========================================
-    DRAW BOX CORNERS BORDER
-    =========================================
-    Draw no-fill circles to create border.
-    -----------------------------------------
-    """
-    if (border_color is not None and
-        border_color is not None):
-
-        # TOP-LEFT BORDER
-        cv2.circle(
-            MatLike,
-            (
-                x1 + border_radius,
-                y1 + border_radius
-            ),
-            radius=border_radius,
-            color=border_color,
-            thickness=border_thickness,
-            lineType=cv2.LINE_AA
-        )
-
-
-        # TOP-RIGHT BORDER
-        cv2.circle(
-            MatLike,
-            (
-                x2 - border_radius,
-                y1 + border_radius
-            ),
-            radius=border_radius,
-            color=border_color,
-            thickness=border_thickness,
-            lineType=cv2.LINE_AA
-        )
-
-        # BOTTOM-LEFT BORDER
-        cv2.circle(
-            MatLike,
-            (
-                x1 + border_radius,
-                y2 - border_radius
-            ),
-            radius=border_radius,
-            color=border_color,
-            thickness=border_thickness,
-            lineType=cv2.LINE_AA
-        )
-
-        # BOTTOM-RIGHT BORDER
-        cv2.circle(
-            MatLike,
-            (
-                x2 - border_radius,
-                y2 - border_radius
-            ),
-            radius=border_radius,
-            color=border_color,
-            thickness=border_thickness,
-            lineType=cv2.LINE_AA
-        )
-
-    """
     BOX FILL
+    =========================================
     """
     # MAIN FILL
     cv2.rectangle(
@@ -236,13 +185,71 @@ def box(MatLike: np.ndarray,
 
     """
     =========================================
-    DRAW BOX SIDES BORDER
+    DRAW BOX BORDER
     =========================================
-    Draw lines to create sides border.
-    -----------------------------------------
     """
     if (border_color is not None and
         border_color is not None):
+        # TOP-LEFT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x1 + border_radius,
+                y1 + border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=180,
+            endAngle=270,
+            color=border_color,
+            thickness=border_thickness
+        )
+
+        # TOP-RIGHT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x2 - border_radius,
+                y1 + border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=270,
+            endAngle=360,
+            color=border_color,
+            thickness=border_thickness
+        )
+
+        # BOTTOM-LEFT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x1 + border_radius,
+                y2 - border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=90,
+            endAngle=180,
+            color=border_color,
+            thickness=border_thickness
+        )
+
+        # BOTTOM-RIGHT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x2 - border_radius,
+                y2 - border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=0,
+            endAngle=90,
+            color=border_color,
+            thickness=border_thickness
+        )
+
         # LEFT BORDER
         draw_line(
             MatLike,
