@@ -52,135 +52,138 @@ def draw_line(MatLike: np.ndarray,
 def box(MatLike: np.ndarray,
         start_point: tuple[int, int],
         end_point: tuple[int, int],
-        fill_color: tuple[int, int, int],
+        fill_color: tuple[int, int, int]|None=None,
         border_color: tuple[int, int, int]|None=None,
         border_thickness: int|None=None,
         dash_size: int=0,
         dash_gap: int=0,
         border_radius: int=0
         ) -> None:
+    if fill_color is None and border_thickness is None:
+        raise RuntimeError("Can't draw box")
 
     x1, y1 = start_point
     x2, y2 = end_point
 
-    """
-    =========================================
-    BOX CORNERS
-    =========================================
-    """
-    # TOP-LEFT CORNER
-    cv2.ellipse(
-        MatLike,
-        (
-            x1 + border_radius,
-            y1 + border_radius
-        ),
-        axes=[border_radius]*2,
-        angle=0,
-        startAngle=180,
-        endAngle=270,
-        color=fill_color,
-        thickness=-1
-    )
+    if fill_color:
+        """
+        =========================================
+        BOX CORNERS
+        =========================================
+        """
+        # TOP-LEFT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x1 + border_radius,
+                y1 + border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=180,
+            endAngle=270,
+            color=fill_color,
+            thickness=-1
+        )
 
-    # TOP-RIGHT CORNER
-    cv2.ellipse(
-        MatLike,
-        (
-            x2 - border_radius,
-            y1 + border_radius
-        ),
-        axes=[border_radius]*2,
-        angle=0,
-        startAngle=270,
-        endAngle=360,
-        color=fill_color,
-        thickness=-1
-    )
+        # TOP-RIGHT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x2 - border_radius,
+                y1 + border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=270,
+            endAngle=360,
+            color=fill_color,
+            thickness=-1
+        )
 
-    # BOTTOM-LEFT CORNER
-    cv2.ellipse(
-        MatLike,
-        (
-            x1 + border_radius,
-            y2 - border_radius
-        ),
-        axes=[border_radius]*2,
-        angle=0,
-        startAngle=90,
-        endAngle=180,
-        color=fill_color,
-        thickness=-1
-    )
+        # BOTTOM-LEFT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x1 + border_radius,
+                y2 - border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=90,
+            endAngle=180,
+            color=fill_color,
+            thickness=-1
+        )
 
-    # BOTTOM-RIGHT CORNER
-    cv2.ellipse(
-        MatLike,
-        (
-            x2 - border_radius,
-            y2 - border_radius
-        ),
-        axes=[border_radius]*2,
-        angle=0,
-        startAngle=0,
-        endAngle=90,
-        color=fill_color,
-        thickness=-1
-    )
+        # BOTTOM-RIGHT CORNER
+        cv2.ellipse(
+            MatLike,
+            (
+                x2 - border_radius,
+                y2 - border_radius
+            ),
+            axes=[border_radius]*2,
+            angle=0,
+            startAngle=0,
+            endAngle=90,
+            color=fill_color,
+            thickness=-1
+        )
 
 
-    """
-    =========================================
-    BOX FILL
-    =========================================
-    """
-    # MAIN FILL
-    cv2.rectangle(
-        MatLike,
-        (
-            x1 + border_radius,
-            y1
-        ),
-        (
-            x2 - border_radius,
-            y2
-        ),
-        color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
-    )
+        """
+        =========================================
+        BOX FILL
+        =========================================
+        """
+        # MAIN FILL
+        cv2.rectangle(
+            MatLike,
+            (
+                x1 + border_radius,
+                y1
+            ),
+            (
+                x2 - border_radius,
+                y2
+            ),
+            color=fill_color,
+            thickness=-1,
+            lineType=cv2.LINE_AA
+        )
 
-    # LEFT SIDE FILL
-    cv2.rectangle(
-        MatLike,
-        (
-            x1,
-            y1 + border_radius
-        ),
-        (
-            x1 + border_radius,
-            y2 - border_radius
-        ),
-        color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
-    )
+        # LEFT SIDE FILL
+        cv2.rectangle(
+            MatLike,
+            (
+                x1,
+                y1 + border_radius
+            ),
+            (
+                x1 + border_radius,
+                y2 - border_radius
+            ),
+            color=fill_color,
+            thickness=-1,
+            lineType=cv2.LINE_AA
+        )
 
-    # RIGHT SIDE FILL
-    cv2.rectangle(
-        MatLike,
-        (
-            x2 - border_radius,
-            y1 + border_radius
-        ),
-        (
-            x2,
-            y2 - border_radius
-        ),
-        color=fill_color,
-        thickness=-1,
-        lineType=cv2.LINE_AA
-    )
+        # RIGHT SIDE FILL
+        cv2.rectangle(
+            MatLike,
+            (
+                x2 - border_radius,
+                y1 + border_radius
+            ),
+            (
+                x2,
+                y2 - border_radius
+            ),
+            color=fill_color,
+            thickness=-1,
+            lineType=cv2.LINE_AA
+        )
 
 
     """
@@ -391,7 +394,7 @@ def progress_bar(MatLike: np.ndarray,
                  background_fill: tuple[int, int, int],
                  bar_fill: tuple[int, int, int],
                  thickness: int,
-                 border_color: tuple[int, int, int]
+                 border_color: tuple[int, int, int]|None=None
                  ) -> None:
     x1, _ = start_point
     x2, y2 = end_point
@@ -411,9 +414,9 @@ def progress_bar(MatLike: np.ndarray,
         MatLike,
         start_point,
         end_point,
-        background_fill,
-        border_color,
-        thickness
+        fill_color=background_fill,
+        border_color=None,
+        border_thickness=None
     )
 
     if fill_size > 0:
@@ -422,4 +425,14 @@ def progress_bar(MatLike: np.ndarray,
             start_point,
             (x1 + fill_size, y2),
             bar_fill
+        )
+
+    if border_color and thickness:
+        box(
+            MatLike,
+            start_point,
+            end_point,
+            fill_color=None,
+            border_color=border_color,
+            border_thickness=thickness
         )
